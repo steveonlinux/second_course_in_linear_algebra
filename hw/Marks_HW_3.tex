@@ -1,0 +1,338 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 3}
+\newcommand{\AssignmentType}{Homework} % or Discussion
+\newcommand{\AssignmentNumber}{3}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+
+\ProblemDivider{5.B.2}
+
+\begin{problemBox}
+\ProblemAnnounce
+Suppose $V$ is a complex vector space and $T \in \mathcal{L}(V)$ has no eigenvalues.
+Prove that every subspace of $V$ invariant under $T$ is either $\{0\}$ or infinite-dimensional.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose $W$ is a $T$-invariant subspace of $V$.
+
+If $W = \{0\}$, then we are done.
+
+Assume $W \neq \{0\}$ and suppose toward a contradiction that $W$ is finite-dimensional.
+Because $W$ is finite-dimensional and over $\mathbb{C}$, the operator
+$T|_W$ must have an eigenvalue (by Theorem 5.19).
+
+Thus there exists $0 \neq w \in W$ and $\lambda \in \mathbb{C}$ such that
+\[
+T w = \lambda w.
+\]
+
+But then $\lambda$ is an eigenvalue of $T$, contradicting the assumption
+that $T$ has no eigenvalues.
+
+Therefore, no nonzero finite-dimensional invariant subspace can exist.
+Hence every invariant subspace is either $\{0\}$ or infinite-dimensional.
+
+\end{solutionBox}
+
+\ProblemDivider{5.B.4}
+
+\begin{problemBox}
+\ProblemAnnounce
+Suppose $\mathbb{F}=\mathbb{C}$, $T\in\mathcal{L}(V)$, $p$ is a nonconstant polynomial,
+and $\alpha\in\mathbb{C}$. Prove that $\alpha$ is an eigenvalue of $p(T)$
+if and only if $\alpha=p(\lambda)$ for some eigenvalue $\lambda$ of $T$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+($\Rightarrow$)
+Suppose $\alpha$ is an eigenvalue of $p(T)$.
+Then there exists $v \neq 0$ such that
+\[
+p(T)v = \alpha v.
+\]
+
+Let $q(z) = p(z) - \alpha$.
+Then $q$ is a nonconstant polynomial and
+\[
+q(T)v = 0.
+\]
+
+Because $q$ factors over $\mathbb{C}$,
+\[
+q(z) = c(z-\lambda_1)\cdots(z-\lambda_m)
+\]
+for some $c \neq 0$.
+
+Hence
+\[
+0 = q(T)v = c(T-\lambda_1 I)\cdots(T-\lambda_m I)v.
+\]
+
+Since $v \neq 0$, at least one factor $T-\lambda_k I$
+is not injective. Thus $\lambda_k$ is an eigenvalue of $T$.
+Because $\lambda_k$ is a zero of $q$,
+\[
+p(\lambda_k)=\alpha.
+\]
+
+($\Leftarrow$)
+Suppose $\alpha=p(\lambda)$ for some eigenvalue $\lambda$ of $T$.
+Then there exists $v\neq 0$ such that
+\[
+Tv=\lambda v.
+\]
+
+Then
+\[
+p(T)v=p(\lambda)v=\alpha v.
+\]
+
+Hence $\alpha$ is an eigenvalue of $p(T)$.
+
+\end{solutionBox}
+
+\ProblemDivider{5.B.5}
+
+\begin{problemBox}
+\ProblemAnnounce
+Give an example of an operator on $\mathbb{R}^2$ that shows the result in Exercise 4
+does not hold if $\mathbb{C}$ is replaced with $\mathbb{R}$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Let $T \in \mathcal{L}(\mathbb{R}^2)$ be defined by
+\[
+T(x,y)=(-y,x),
+\]
+a rotation by $90^\circ$.
+
+Let $p(t)=t^2$.
+Then
+\[
+p(T)=T^2=-I.
+\]
+
+Thus $p(T)$ has eigenvalue $-1$.
+
+However, $T$ has no real eigenvalues (it is a rotation in $\mathbb{R}^2$).
+Therefore $-1$ is not equal to $p(\lambda)$ for any eigenvalue $\lambda$ of $T$.
+
+\end{solutionBox}
+
+\ProblemDivider{5.B.6}
+
+\begin{problemBox}
+\ProblemAnnounce
+Suppose $T \in \mathcal{L}(\mathbb{F}^2)$ is defined by
+$T(w,z)=(-z,w)$. Find the minimal polynomial of $T$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Observe that
+\[
+T^2(w,z)=T(-z,w)=(-w,-z)=- (w,z).
+\]
+
+Thus
+\[
+T^2 = -I.
+\]
+
+Hence
+\[
+T^2 + I = 0.
+\]
+
+Therefore $T$ satisfies the polynomial
+\[
+m(z)=z^2+1.
+\]
+
+Because $T$ is not a scalar multiple of the identity,
+no polynomial of degree $1$ annihilates $T$.
+Thus the minimal polynomial is
+
+\[
+\boxed{z^2+1}.
+\]
+
+\end{solutionBox}
+
+\ProblemDivider{5.C.1}
+
+\begin{problemBox}
+\ProblemAnnounce
+Prove or give a counterexample:
+If $T^2$ has an upper-triangular matrix with respect to some basis,
+then $T$ has an upper-triangular matrix with respect to some basis.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Counterexample:
+
+Let $T \in \mathcal{L}(\mathbb{R}^2)$ be defined by
+\[
+T(x,y)=(-y,x).
+\]
+
+Then
+\[
+T^2=-I,
+\]
+which is upper-triangular with respect to the standard basis.
+
+However, if $T$ had an upper-triangular matrix,
+then $T$ would have a real eigenvalue.
+But $T$ has no real eigenvalues (it is a rotation).
+
+Therefore the statement is false.
+
+\end{solutionBox}
+
+\ProblemDivider{5.C.2}
+
+\begin{problemBox}
+\ProblemAnnounce
+Let $A$ and $B$ be upper-triangular matrices with diagonal entries
+$\alpha_1,\dots,\alpha_n$ and $\beta_1,\dots,\beta_n$ respectively.
+Show:
+(a) $A+B$ is upper-triangular with diagonal $\alpha_j+\beta_j$.
+(b) $AB$ is upper-triangular with diagonal $\alpha_j\beta_j$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+(a) For $j>k$, we have $A_{jk}=B_{jk}=0$.
+Thus
+\[
+(A+B)_{jk}=A_{jk}+B_{jk}=0.
+\]
+
+For diagonal entries,
+\[
+(A+B)_{jj}=A_{jj}+B_{jj}=\alpha_j+\beta_j.
+\]
+
+Thus $A+B$ is upper-triangular.
+
+(b) By matrix multiplication,
+\[
+(AB)_{jj}=\sum_{r=1}^n A_{jr}B_{rj}.
+\]
+
+If $r\neq j$, then either $j>r$ (so $A_{jr}=0$)
+or $r>j$ (so $B_{rj}=0$).
+Hence all such terms vanish and
+
+\[
+(AB)_{jj}=A_{jj}B_{jj}=\alpha_j\beta_j.
+\]
+
+If $j>k$, then
+\[
+(AB)_{jk}=\sum_{r=1}^n A_{jr}B_{rk}.
+\]
+
+For $r\le j-1$, $A_{jr}=0$.
+For $r\ge j$, since $j>k$, we have $r>k$,
+so $B_{rk}=0$.
+Hence all terms vanish and $(AB)_{jk}=0$.
+
+Thus $AB$ is upper-triangular with diagonal
+$\alpha_1\beta_1,\dots,\alpha_n\beta_n$.
+
+\end{solutionBox}
+
+\end{document}
+

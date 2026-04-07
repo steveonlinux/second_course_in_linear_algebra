@@ -1,0 +1,316 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+\usepackage{amsfonts}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 5}
+\newcommand{\AssignmentType}{Homework 5}
+\newcommand{\AssignmentNumber}{}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\id}{\mathrm{id}}
+
+\DeclareMathOperator{\Range}{range}
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\Span}{span}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.D.2}
+Suppose \(T \in \mathcal{L}(V)\) has a diagonal matrix \(A\) with respect to some basis of \(V\). Prove that if \(\lambda \in \mathbf{F}\), then \(\lambda\) appears on the diagonal of \(A\) precisely \(\dim E(\lambda, T)\) times.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+Let \((v_1,\dots,v_n)\) be a basis of \(V\) such that \(\mathcal{M}(T,(v_1,\dots,v_n))\) is diagonal with diagonal entries \(\lambda_1,\dots,\lambda_n\). For any \(\mu \in \F\), let \(d_\mu\) be the number of times \(\mu\) appears among \(\lambda_1,\dots,\lambda_n\).
+
+First, we show \(\dim E(\mu,T) \le d_\mu\). Consider \(T - \mu I\). In the same basis, \(\mathcal{M}(T-\mu I)\) is diagonal with entries \(\lambda_i - \mu\). The number of zero entries on the diagonal is exactly \(d_\mu\). Since the null space consists of vectors whose coordinates are zero except possibly those corresponding to zero diagonal entries, we have \(\dim \null(T-\mu I) \le d_\mu\). But \(\null(T-\mu I) = E(\mu,T)\), so \(\dim E(\mu,T) \le d_\mu\).
+
+By 5.55, the eigenspaces of \(T\) form a direct sum, so 
+\[
+\sum_{\mu \in \F} \dim E(\mu,T) = n.
+\]
+And \(\sum_{\mu \in \F} d_\mu = n\) as well. Since \(\dim E(\mu,T) \le d_\mu\) for all \(\mu\), equality must hold for every \(\mu\). Thus \(\dim E(\lambda,T) = d_\lambda\) for each \(\lambda \in \F\).
+\end{solutionBox}
+
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.D.3}
+Suppose \(V\) is finite-dimensional and \(T \in \mathcal{L}(V)\). Prove that if the operator \(T\) is diagonalizable, then \(V = \operatorname{null} T \oplus \operatorname{range} T\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+Since \(T\) is diagonalizable,
+\[
+V = E(0, T) \oplus E(\lambda_1, T) \oplus \dots \oplus E(\lambda_m, T)
+\]
+
+where \(\lambda_i\) are the distinct nonzero eigenvalues. Let
+
+\[
+W = E(\lambda_1, T) \oplus \dots \oplus E(\lambda_m, T)
+\]
+
+so \(V = \Null T \oplus W\).
+
+Take any \(v = u + w_1 + \dots + w_m \in V\), with \(u \in \Null T\) and \(w_i \in E(\lambda_i, T)\). Then
+
+\[
+Tv = \lambda_1 w_1 + \dots + \lambda_m w_m \in W.
+\]
+
+Thus \(\Range T \subseteq W\). Conversely, for any \(w_1 + \dots + w_m \in W\),
+
+\[
+w_1 + \dots + w_m =
+T\left(
+\frac{w_1}{\lambda_1} + \dots + \frac{w_m}{\lambda_m}
+\right)
+\in \Range T.
+\]
+
+Thus \(W \subseteq \Range T\), so \(W = \Range T\). Therefore
+
+\[
+V = \Null T \oplus \Range T.
+\]
+\end{solutionBox}
+
+\ProblemDivider{3}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.D.6}
+Suppose \(T \in \mathcal{L}(\mathbf{F}^5)\) and \(\dim E(8, T) = 4\). Prove that \(T - 2I\) or \(T - 6I\) is invertible.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+We will prove the contrapositive: if neither \(T-2I\) nor \(T-6I\) is invertible, then \(\dim E(8, T) \le 3\).
+
+If \(T-2I\) is not invertible, then \(2\) is an eigenvalue, so \(\dim E(2, T) \ge 1\). Similarly, \(\dim E(6, T) \ge 1\).
+
+By 5.54,
+
+\[
+\dim E(8, T) + \dim E(2, T) + \dim E(6, T) \le 5.
+\]
+
+Then
+
+\[
+\dim E(8, T) \le 5 - 1 - 1 = 3.
+\]
+
+Thus \(\dim E(8, T) \neq 4\).
+\end{solutionBox}
+
+\ProblemDivider{4}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.D.7}
+Suppose \(T \in \mathcal{L}(V)\) is invertible. Prove that
+
+\[
+E(\lambda, T) = E(1/\lambda , T^{-1})
+\]
+
+for every \(\lambda \in \mathbf{F}\) with \(\lambda \neq 0\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+For any nonzero \(\lambda\) and any \(v \in V\),
+
+\[
+\begin{aligned}
+v \in E(\lambda, T)
+&\iff Tv = \lambda v \\
+&\iff T^{-1}(Tv) = T^{-1}(\lambda v) \\
+&\iff v = \lambda T^{-1}v \\
+&\iff T^{-1}v = \frac{1}{\lambda} v \\
+&\iff v \in E(1/\lambda, T^{-1}).
+\end{aligned}
+\]
+
+Thus the eigenspaces are equal as sets and thus as subspaces.
+\end{solutionBox}
+
+\ProblemDivider{5}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.D.11}
+Find \(T \in \mathcal{L}(\mathbf{C}^3)\) such that \(6\) and \(7\) are eigenvalues of \(T\) and such that \(T\) does not have a diagonal matrix with respect to any basis of \(\mathbf{C}^3\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+Let \(T\) be the operator on \(\C^3\) whose matrix with respect to the standard basis is
+
+\[
+\mathcal{M}(T) =
+\begin{pmatrix}
+6 & 1 & 0 \\
+0 & 6 & 0 \\
+0 & 0 & 7
+\end{pmatrix}.
+\]
+
+Because the matrix is upper-triangular, its eigenvalues are \(6\) and \(7\).
+
+\[
+E(6, T) = \Span(e_1), \qquad
+E(7, T) = \Span(e_3).
+\]
+
+Thus
+
+\[
+\dim E(6,T) + \dim E(7,T) = 2 \neq 3.
+\]
+
+So by 5.55, \(T\) is not diagonalizable.
+\end{solutionBox}
+
+\ProblemDivider{Extra Credit}
+
+\begin{problemBox}
+\ProblemAnnounce
+\textbf{Extra Credit.} Is the converse of Problem 3 valid? Consider \(T(w,z)=(w+z,z)\) on \(V=\mathbf{F}^2\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+The converse is not valid. The operator \(T: \F^2 \to \F^2\) defined by
+\[
+T(w, z) = (w+z, z)
+\]
+is a counterexample.
+
+First we check the condition \(V = \Null T \oplus \Range T\).
+
+\begin{itemize}
+\item The null space:
+\[
+\Null T = \{(w,z) : w+z = 0,\; z = 0\} = \{(0,0)\}.
+\]
+
+\item The range:
+\[
+\Range T = \{(w+z, z) : w,z \in \F\}.
+\]
+Let \(x = w+z\) and \(y = z\). Then every \((x,y) \in \F^2\) can be written in this form, so
+\[
+\Range T = \F^2.
+\]
+\end{itemize}
+
+Thus
+\[
+V = \{0\} \oplus \F^2 = \Null T \oplus \Range T.
+\]
+
+However, \(T\) is not diagonalizable. The matrix of \(T\) with respect to the standard basis is
+
+\[
+\mathcal{M}(T) =
+\begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}.
+\]
+
+Its only eigenvalue is \(1\), and the corresponding eigenspace is
+
+\[
+E(1,T) = \{(w,0) : w \in \F\} = \Span(e_1),
+\]
+
+which has dimension \(1\). Since \(\dim V = 2\), the sum of the dimensions of the eigenspaces is \(1 \neq 2\). By 5.55, \(T\) is not diagonalizable.
+
+Therefore the condition \(V = \Null T \oplus \Range T\) does not imply that \(T\) is diagonalizable.
+\end{solutionBox}
+
+\end{document}

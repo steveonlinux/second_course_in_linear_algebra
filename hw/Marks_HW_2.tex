@@ -1,0 +1,285 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 2}
+\newcommand{\AssignmentType}{Homework} % or Discussion
+\newcommand{\AssignmentNumber}{2}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Lmap}{\mathcal{L}}
+\newcommand{\inv}{^{-1}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.3}
+Suppose \( T \in \Lmap(V) \). Prove that the intersection of every collection of
+subspaces of \( V \) invariant under \( T \) is invariant under \( T \).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Let \(\mathcal{A} = \{U_i\}_{i \in I}\) be a collection of subspaces of \(V\) each invariant under \(T\). 
+Let \(W = \bigcap_{i \in I} U_i\). Since each \(U_i\) is a subspace, \(W\) is a subspace of \(V\) (by 1.C.11). 
+
+Take any \(w \in W\). Then \(w \in U_i\) for every \(i \in I\). Because each \(U_i\) is invariant under \(T\), 
+\(T(w) \in U_i\) for every \(i\). So \(T(w) \in \bigcap_{i \in I} U_i = W\).
+
+Thus \(W\) is invariant under \(T\).
+
+\end{solutionBox}
+
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.5}
+Suppose \( T \in \Lmap(\R^2) \) is defined by \( T(x, y) = (-3y, x) \). Find the eigenvalues of \( T \).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose \(\lambda \in \R\) is an eigenvalue of \(T\) with eigenvector \((x,y) \neq (0,0)\). Then
+\[
+T(x,y) = \lambda (x,y) \quad \Rightarrow \quad (-3y, x) = (\lambda x, \lambda y).
+\]
+This yields the system
+\[
+\begin{cases}
+-3y = \lambda x,\\
+x = \lambda y.
+\end{cases}
+\]
+Substituting \(x = \lambda y\) into the first equation gives
+\[
+-3y = \lambda (\lambda y) = \lambda^2 y.
+\]
+If \(y = 0\), then \(x = 0\) from the second equation, contradicting \((x,y) \neq (0,0)\) (by 5.8). Thus \(y \neq 0\), and we may divide by \(y\) to obtain
+\[
+\lambda^2 = -3.
+\]
+No real \(\lambda\) satisfies this equation. Therefore \(T\) has no (real) eigenvalues.
+
+\end{solutionBox}
+
+\ProblemDivider{3}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.11}
+Suppose \(V\) is finite-dimensional, \(T \in \Lmap(V)\), and \(\alpha \in \F\). Prove that
+there exists \(\delta > 0\) such that \(T - \lambda I\) is invertible for all \(\lambda \in \F\) with \(0 < |\alpha - \lambda| < \delta\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+If \(T\) has no eigenvalues, then by Theorem 5.7 (or the analogous result in the text) \(T - \lambda I\) is invertible for every \(\lambda \in \F\); we may choose any \(\delta > 0\).
+
+Now suppose \(T\) has eigenvalues. Because \(V\) is finite‑dimensional, \(T\) has only finitely many distinct eigenvalues; list them as \(\lambda_1, \dots, \lambda_n\).
+
+If \(\alpha\) equals one of the \(\lambda_k\), let
+\[
+\delta = \min\{|\alpha - \lambda_j| : \lambda_j \neq \alpha\}.
+\]
+If \(\alpha\) is not an eigenvalue, let
+\[
+\delta = \min\{|\alpha - \lambda_j| : j = 1,\dots,n\}.
+\]
+In either case, \(\delta > 0\) (the minimum is taken over a finite set of positive numbers).
+
+For any \(\lambda \in \F\) with \(0 < |\alpha - \lambda| < \delta\), the distance from \(\lambda\) to every eigenvalue \(\lambda_j\) is positive, hence \(\lambda\) is not an eigenvalue of \(T\). By Theorem 5.7, \(T - \lambda I\) is invertible.
+
+\end{solutionBox}
+
+\ProblemDivider{4}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.13}
+Suppose \(T \in \Lmap(V)\) and \(S \in \Lmap(V)\) is invertible.
+\begin{enumerate}
+  \item[(a)] Prove that \(T\) and \(S^{-1}TS\) have the same eigenvalues.
+  \item[(b)] What is the relationship between the eigenvectors of \(T\) and the eigenvectors of \(S^{-1}TS\)?
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+\begin{enumerate}
+  \item[(a)] Let \(\lambda \in \F\).  
+  \(\lambda\) is an eigenvalue of \(T\)  
+  \(\iff\) there exists \(u \in V\), \(u \neq 0\), such that \(Tu = \lambda u\)  
+  \(\iff\) there exists \(u \in V\), \(u \neq 0\), such that \(S^{-1}TS (S^{-1}u) = \lambda (S^{-1}u)\) (set \(v = S^{-1}u\), which is nonzero because \(S\) is invertible)  
+  \(\iff\) \(\lambda\) is an eigenvalue of \(S^{-1}TS\).
+
+  \item[(b)] The correspondence is given by \(v \mapsto Sv\) from eigenvectors of \(S^{-1}TS\) to eigenvectors of \(T\), and \(u \mapsto S^{-1}u\) from eigenvectors of \(T\) to eigenvectors of \(S^{-1}TS\).  
+  So,
+  \[
+  E(\lambda, S^{-1}TS) = \{ S^{-1}u : u \in E(\lambda, T) \}, \qquad
+  E(\lambda, T) = \{ Sv : v \in E(\lambda, S^{-1}TS) \}.
+  \]
+\end{enumerate}
+
+\end{solutionBox}
+
+\ProblemDivider{5}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.14}
+Give an example of an operator on \(\R^4\) that has no (real) eigenvalues.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Define \(T \in \Lmap(\R^4)\) by
+\[
+T(x_1, x_2, x_3, x_4) = (-x_2, x_1, -x_4, x_3).
+\]
+This is essentially a double rotation (two independent plane rotations).  
+
+Suppose \(\lambda \in \R\) were an eigenvalue with eigenvector \((x_1,x_2,x_3,x_4) \neq 0\). Then
+\[
+(-x_2, x_1, -x_4, x_3) = (\lambda x_1, \lambda x_2, \lambda x_3, \lambda x_4).
+\]
+Equating components gives
+\[
+\begin{cases}
+-x_2 = \lambda x_1,\\
+x_1 = \lambda x_2,\\
+-x_4 = \lambda x_3,\\
+x_3 = \lambda x_4.
+\end{cases}
+\]
+If \(\lambda = 0\), then \(x_1 = x_2 = x_3 = x_4 = 0\), a contradiction. So \(\lambda \neq 0\).  
+From the first two equations we obtain \(x_1 = \lambda x_2 = \lambda(-\lambda x_1) = -\lambda^2 x_1\), hence \((1+\lambda^2)x_1 = 0\) and thus \(x_1 = 0\). Then \(x_2 = 0\) as well.  
+Similarly, the last two equations give \(x_3 = 0\) and \(x_4 = 0\). Hence no nonzero eigenvector exists. Therefore \(T\) has no real eigenvalues.
+
+\end{solutionBox}
+\newpage
+
+\ProblemDivider{6}
+
+\begin{problemBox}
+\ProblemAnnounce
+Show that if \(L(\R)\) stands for the linear maps \(T:\R \to \R\), then \(L(\R)\) is isomorphic to \(\R\).
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Define \(F : L(\R) \to \R\) by \(F(T) = T(1)\) for each \(T \in L(\R)\).
+
+\begin{itemize}
+  \item \textbf{Linearity:}  
+  Let \(T_1, T_2 \in L(\R)\) and \(\alpha \in \R\). Then
+  \[
+  F(T_1 + T_2) = (T_1 + T_2)(1) = T_1(1) + T_2(1) = F(T_1) + F(T_2),
+  \]
+  \[
+  F(\alpha T_1) = (\alpha T_1)(1) = \alpha T_1(1) = \alpha F(T_1).
+  \]
+  Hence \(F\) is linear.
+
+  \item \textbf{Injectivity:}  
+  Suppose \(F(T_1) = F(T_2)\). Then \(T_1(1) = T_2(1)\). For any \(x \in \R\),
+  \[
+  T_1(x) = T_1(x \cdot 1) = x T_1(1) = x T_2(1) = T_2(x \cdot 1) = T_2(x).
+  \]
+  Thus \(T_1 = T_2\), so \(F\) is injective.
+
+  \item \textbf{Surjectivity:}  
+  Given \(r \in \R\), define \(T_r : \R \to \R\) by \(T_r(x) = r x\). Clearly \(T_r \in L(\R)\) and
+  \[
+  F(T_r) = T_r(1) = r.
+  \]
+  Hence \(F\) is surjective.
+\end{itemize}
+
+Therefore \(F\) is a vector‑space isomorphism, and \(L(\R) \cong \R\).
+
+\end{solutionBox}
+
+\end{document}

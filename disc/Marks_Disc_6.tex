@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Discussion 6}
+\newcommand{\AssignmentType}{Discussion} % or Discussion
+\newcommand{\AssignmentNumber}{6}
+
+\newcommand{\Contributors}{
+Marks, Stephen\\
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{1}
+Recall that
+\[
+R_{\theta}(x,y) = (x\cos\theta - y\sin\theta,\; x\sin\theta + y\cos\theta)
+\]
+is the \(\theta\)-rotation of the plane \(R_{\theta} \in \mathcal{L}(\C^2)\).
+
+\begin{enumerate}
+    \item[(a)] Fix \(\theta \in (0,2\pi)\). Show that the eigenvalues of \(R_{\theta}\) are \(e^{i\theta} = \cos\theta + i\sin\theta\) and \(e^{-i\theta} = \cos\theta - i\sin\theta\).
+    \item[(b)] Find the corresponding eigenvectors.
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+\begin{enumerate}
+    \item[(a)] We want \(\lambda \in \C\) and nonzero \((x,y) \in \C^2\) such that
+    \[
+    R_{\theta}(x,y) = \lambda (x,y).
+    \]
+    This gives the system:
+    \[
+    \begin{cases}
+        x\cos\theta - y\sin\theta = \lambda x \\[4pt]
+        x\sin\theta + y\cos\theta = \lambda y
+    \end{cases}
+    \]
+    Then:
+    \[
+    \begin{cases}
+        (\cos\theta - \lambda)x - (\sin\theta) y = 0 \\[4pt]
+        (\sin\theta)x + (\cos\theta - \lambda) y = 0
+    \end{cases}
+    \]
+    If \(\sin\theta \neq 0\), we have
+    \[
+    y = \frac{\cos\theta - \lambda}{\sin\theta}\, x.
+    \]
+    By substituting into the second equation:
+    \[
+    \sin\theta \cdot x + (\cos\theta - \lambda) \cdot \frac{\cos\theta - \lambda}{\sin\theta}\, x = 0.
+    \]
+    Multiply by \(\sin\theta\):
+    \[
+    \sin^2\theta\, x + (\cos\theta - \lambda)^2 x = 0.
+    \]
+    Since \(x \neq 0\),
+    \[
+    \sin^2\theta + (\cos\theta - \lambda)^2 = 0.
+    \]
+    By expanding \((\cos\theta - \lambda)^2 = \cos^2\theta - 2\lambda\cos\theta + \lambda^2\) and using \(\sin^2\theta + \cos^2\theta = 1\):
+    \[
+    1 - 2\lambda\cos\theta + \lambda^2 = 0.
+    \]
+    Thus
+    \[
+    \lambda^2 - 2\lambda\cos\theta + 1 = 0.
+    \]
+    Solving the quadratic:
+    \[
+    \lambda = \cos\theta \pm \sqrt{\cos^2\theta - 1}
+          = \cos\theta \pm i\sin\theta.
+    \]
+    Then
+    \[
+    \lambda_1 = e^{i\theta} = \cos\theta + i\sin\theta,\quad
+    \lambda_2 = e^{-i\theta} = \cos\theta - i\sin\theta.
+    \]
+
+    \item[(b)] For \(\lambda_1 = e^{i\theta} = \cos\theta + i\sin\theta\):
+    \[
+    (\cos\theta - (\cos\theta + i\sin\theta))x - (\sin\theta) y = 0
+    \]
+    \[
+    (-i\sin\theta)x - \sin\theta\, y = 0.
+    \]
+    Assuming \(\sin\theta \neq 0\), divide by \(-\sin\theta\):
+    \[
+    i x + y = 0 \quad\Longrightarrow\quad y = -i x.
+    \]
+    Choose \(x = 1\), then \(y = -i\). So an eigenvector is \((1, -i)\).
+
+    For \(\lambda_2 = e^{-i\theta} = \cos\theta - i\sin\theta\):
+    \[
+    (\cos\theta - (\cos\theta - i\sin\theta))x - (\sin\theta) y = 0
+    \]
+    \[
+    (i\sin\theta)x - \sin\theta\, y = 0.
+    \]
+    Divide by \(\sin\theta\):
+    \[
+    i x - y = 0 \quad\Longrightarrow\quad y = i x.
+    \]
+    Choose \(x = 1\), then \(y = i\). So an eigenvector is \((1, i)\).
+
+    Thus the eigenvectors are \((1,-i)\) for \(e^{i\theta}\) and \((1,i)\) for \(e^{-i\theta}\).
+\end{enumerate}
+
+\end{solutionBox}
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{2}
+If \(\mathcal{L}(\R^2,\R)\) stands for the operators from \(\R^2\) to \(\R\), show that \(\mathcal{L}(\R^2,\R)\) and \(\R^2\) are isomorphic vector spaces. This is a continuation of Problem 6 in Homework 2.
+
+[Hint: Define \(G:\mathcal{L}(\R^2,\R) \longrightarrow \R^2\) as follows: If \(T:\R^2 \longrightarrow \R\) is linear, set
+\[
+G(T) := (T(1,0), T(0,1)).
+\]
+Notice that \(G(T)\) is the vector in \(\R^2\) whose entries are the images under \(T\) of the elements in the canonical basis \(\{(1,0),(0,1)\}\). Then show that \(G\) is linear, 1-1 and onto. For example, if \(T(x,y) = 2x + 3y\), then \(G(T) = (T(1,0),T(0,1)) = (2,3)\).]
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Define \(G: \mathcal{L}(\R^2,\R) \to \R^2\) by
+\[
+G(T) = (T(1,0), T(0,1)).
+\]
+
+\noindent \textbf{Linearity of \(G\):}
+Let \(S,T \in \mathcal{L}(\R^2,\R)\) and \(c \in \R\). Then
+\[
+G(S+T) = ((S+T)(1,0), (S+T)(0,1)) = (S(1,0)+T(1,0), S(0,1)+T(0,1))
+\]
+\[
+= (S(1,0), S(0,1)) + (T(1,0), T(0,1)) = G(S) + G(T).
+\]
+Also,
+\[
+G(cT) = ((cT)(1,0), (cT)(0,1)) = (c T(1,0), c T(0,1))
+= c (T(1,0), T(0,1)) = c G(T).
+\]
+Thus \(G\) is linear.
+
+\noindent \textbf{Injectivity:}
+Suppose \(G(T) = (0,0)\). Then \(T(1,0) = 0\) and \(T(0,1) = 0\). For any \((x,y) \in \R^2\),
+\[
+T(x,y) = T(x(1,0) + y(0,1)) = x T(1,0) + y T(0,1) = x\cdot 0 + y\cdot 0 = 0.
+\]
+Thus \(T\) is the zero operator, so \(\ker G = \{0\}\) and \(G\) is injective.
+
+\noindent \textbf{Surjectivity:}
+Let \((a,b) \in \R^2\). Define \(T: \R^2 \to \R\) by \(T(x,y) = ax + by\). Then \(T\) is linear,
+\[
+T(1,0) = a,\quad T(0,1) = b,
+\]
+so \(G(T) = (a,b)\). Thus \(G\) is surjective.
+
+Since \(G\) is linear, injective, and surjective, it is an isomorphism. Therefore
+\[
+\mathcal{L}(\R^2,\R) \cong \R^2.
+\]
+
+\end{solutionBox}
+
+\end{document}

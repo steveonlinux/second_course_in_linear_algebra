@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Discussion 3}
+\newcommand{\AssignmentType}{Discussion}
+\newcommand{\AssignmentNumber}{3}
+\newcommand{\Contributors}{
+Marks, Stephen\\
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.17}
+Show that the forward shift operator \(T \in \mathcal{L}(\F^{\infty})\) defined by
+\[
+T(z_1, z_2, \ldots) = (0, z_1, z_2, \ldots)
+\]
+has no eigenvalues.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+Suppose \(\lambda\) is an eigenvalue of \(T\) with eigenvector \(\mathbf{z} = (z_1, z_2, \dots) \neq \mathbf{0}\). Then
+\[
+T\mathbf{z} = \lambda \mathbf{z}.
+\]
+So, 
+\[
+(0, z_1, z_2, \dots) = (\lambda z_1, \lambda z_2, \lambda z_3, \dots).
+\]
+Then immediately, \(0 = \lambda z_1\).
+
+\begin{itemize}
+    \item If \(\lambda = 0\), then the remaining equations give \(z_1 = 0\), \(z_2 = 0\), \(z_3 = 0\), and so on. So \(\mathbf{z} = \mathbf{0}\), which is a contradiction. So \(\lambda = 0\) is not an eigenvalue.
+    \item If \(\lambda \neq 0\), then from \(0 = \lambda z_1\) we get \(z_1 = 0\). The second equation gives \(z_1 = \lambda z_2\), so \(0 = \lambda z_2\) and hence \(z_2 = 0\). Then all \(z_k = 0\), again contradicting \(\mathbf{z} \neq \mathbf{0}\).
+\end{itemize}
+Therefore, no \(\lambda \in \F\) can be an eigenvalue of \(T\). Thus \(T\) has no eigenvalues.
+\end{solutionBox}
+
+\newpage
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.A.18}
+Define the backward shift operator \(S \in \mathcal{L}(\F^{\infty})\) by
+\[
+S(z_1, z_2, \dots) = (z_2, z_3, \dots).
+\]
+\begin{enumerate}
+    \item Show that every element of \(\F\) is an eigenvalue of \(S\).
+    \item Find all the eigenvectors of \(S\).
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+\begin{enumerate}
+    \item Let \(\lambda \in \F\). Consider a nonzero \(\mathbf{z} = (z_1, z_2, \dots)\) such that
+    \[
+    S\mathbf{z} = \lambda \mathbf{z}.
+    \]
+    This means
+    \[
+    (z_2, z_3, \dots) = (\lambda z_1, \lambda z_2, \lambda z_3, \dots).
+    \]
+    Comparing components gives: 
+    \[
+    z_{k+1} = \lambda z_k \quad \text{for all } k \ge 1.
+    \]
+    Choose \(z_1 = 1\). Then: 
+    \[
+    z_2 = \lambda, \quad z_3 = \lambda^2, \quad z_4 = \lambda^3, \dots
+    \]
+    Thus the vector
+    \[
+    \mathbf{z}_\lambda = (1, \lambda, \lambda^2, \lambda^3, \dots)
+    \]
+    is nonzero and satisfies \(S\mathbf{z}_\lambda = \lambda \mathbf{z}_\lambda\). So every \(\lambda \in \F\) is an eigenvalue of \(S\).
+
+    \item The eigenspace for \(\lambda\) is
+    \[
+    E_\lambda = \{ c \cdot (1, \lambda, \lambda^2, \dots) \mid c \in \F,\ c \neq 0 \}.
+    \]
+    Therefore, the set of all eigenvectors of \(S\) is the union over all \(\lambda \in \F\) of \(E_\lambda\).
+\end{enumerate}
+
+\end{solutionBox}
+
+\end{document}

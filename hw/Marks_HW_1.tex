@@ -1,0 +1,309 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 1}
+\newcommand{\AssignmentType}{Homework} % or Discussion
+\newcommand{\AssignmentNumber}{1}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Pcal}{\mathcal{P}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{1.C.1}
+For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$.
+\begin{enumerate}
+  \item[(a)] $\{(x_1,x_2,x_3)\in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+  \item[(b)] $\{(x_1,x_2,x_3)\in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+  \item[(c)] $\{(x_1,x_2,x_3)\in \F^3 : x_1x_2x_3 = 0\}$
+  \item[(d)] $\{(x_1,x_2,x_3)\in \F^3 : x_1 = 5x_3\}$
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+For each part, let $S$ denote the set in question.
+
+\begin{enumerate}
+  \item[(a)] This is a subspace of $\F^3$. Clearly $0 = (0,0,0) \in S$. Suppose $u = (u_1,u_2,u_3),\ v = (v_1,v_2,v_3)\in S$ and $\lambda \in \F$. Then
+  \begin{align*}
+    (u_1+v_1) + 2(u_2+v_2) + 3(u_3+v_3) &= (u_1+2u_2+3u_3) + (v_1+2v_2+3v_3) = 0+0 = 0,\\
+    \lambda u_1 + 2(\lambda u_2) + 3(\lambda u_3) &= \lambda(u_1+2u_2+3u_3) = \lambda \cdot 0 = 0.
+  \end{align*}
+  Thus $u+v \in S$ and $\lambda u \in S$, so $S$ is a subspace.
+  
+\item[(b)] This is \textbf{not} a subspace because it does not contain the zero vector: $0+2\cdot0+3\cdot0 = 0 \neq 4$.
+  
+  \item[(c)] Consider $(1,1,0)$ and $(0,0,1)$, both in $S$. Their sum is $(1,1,1)$, and $1\cdot1\cdot1 = 1 \neq 0$, so $(1,1,1) \notin S$. So $S$ is \textbf{not} a subspace because it is not closed under addition.
+  
+  \item[(d)] This is a subspace of $\F^3$. The zero vector satisfies $0 = 5\cdot0$. Let $u = (u_1,u_2,u_3),\ v = (v_1,v_2,v_3) \in S$ and $\lambda \in \F$. Then
+  \begin{align*}
+    (u_1+v_1) - 5(u_3+v_3) &= (u_1-5u_3) + (v_1-5v_3) = 0+0 = 0,\\
+    \lambda u_1 - 5(\lambda u_3) &= \lambda(u_1-5u_3) = \lambda\cdot0 = 0.
+  \end{align*}
+  Hence $u+v \in S$ and $\lambda u \in S$, so $S$ is a subspace.
+\end{enumerate}
+\end{solutionBox}
+
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{1.C.12}
+Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Let $U_1$ and $U_2$ be subspaces of $V$, and let $U = U_1 \cup U_2$.
+
+($\Rightarrow$) Assume $U$ is a subspace. Suppose for contradiction that neither $U_1 \subseteq U_2$ nor $U_2 \subseteq U_1$. Then there exist $u_1 \in U_1 \setminus U_2$ and $u_2 \in U_2 \setminus U_1$. Since $U$ is a subspace, $u_1 + u_2 \in U$. Thus $u_1 + u_2 \in U_1$ or $u_1 + u_2 \in U_2$.
+
+If $u_1 + u_2 \in U_1$, then since $u_1 \in U_1$, we have $(u_1 + u_2) - u_1 = u_2 \in U_1$, contradicting $u_2 \notin U_1$. If $u_1 + u_2 \in U_2$, then since $u_2 \in U_2$, we have $(u_1 + u_2) - u_2 = u_1 \in U_2$, contradicting $u_1 \notin U_2$. Thus the assumption is false; one subspace must be contained in the other.
+
+($\Leftarrow$) Suppose without loss of generality that $U_1 \subseteq U_2$. Then $U = U_1 \cup U_2 = U_2$, which is a subspace of $V$ by hypothesis. Thus $U$ is a subspace.
+
+Therefore, $U_1 \cup U_2$ is a subspace if and only if $U_1 \subseteq U_2$ or $U_2 \subseteq U_1$.
+\end{solutionBox}
+
+\ProblemDivider{3}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{2.C.3}
+\begin{enumerate}
+  \item[(a)] Let $U = \{p \in \Pcal_4(\F) : p(6) = 0\}$. Find a basis of $U$.
+  \item[(b)] Extend the basis in (a) to a basis of $\Pcal_4(\F)$.
+  \item[(c)] Find a subspace $W$ of $\Pcal_4(\F)$ such that $\Pcal_4(\F) = U \oplus W$.
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+\begin{enumerate}
+  \item[(a)] Note that $\Pcal_4(\F)$ consists of polynomials of degree at most 4. If $p(6)=0$, then $x-6$ divides $p$. A basis for $U$ is:
+  \[
+  \{(x-6), (x-6)^2, (x-6)^3, (x-6)^4\}.
+  \]
+  These are linearly independent and span $U$ because any $p \in U$ can be written as $(x-6)q(x)$ with $\deg q \leq 3$. 
+  
+  \item[(b)] The dimension of $\Pcal_4(\F)$ is 5. To extend the basis, we add the constant polynomial $1$. Thus a basis for $\Pcal_4(\F)$ is:
+  \[
+  \{1, (x-6), (x-6)^2, (x-6)^3, (x-6)^4\}.
+  \]
+  
+  \item[(c)] Take $W = \operatorname{span}\{1\}$, the subspace of constant polynomials. Then any $p \in \Pcal_4(\F)$ can be uniquely written as $p(x) = c + (x-6)q(x)$ where $c = p(6)$ and $q \in \Pcal_3(\F)$. Thus, $\Pcal_4(\F) = U \oplus W$.
+\end{enumerate}
+\end{solutionBox}
+
+\ProblemDivider{4}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{2.C.18}
+Suppose $V$ is finite‑dimensional, with $\dim V = n \geq 1$. Prove that there exist one‑dimensional subspaces $V_1, \dots, V_n$ of $V$ such that
+\[
+V = V_1 \oplus \cdots \oplus V_n.
+\]
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Let $\{v_1, \dots, v_n\}$ be a basis of $V$. For each $k = 1,\dots,n$, define $V_k = \operatorname{span}\{v_k\}$. Each $V_k$ is one‑dimensional. Since $\{v_1,\dots,v_n\}$ is a basis, every vector $v \in V$ can be written uniquely as
+\[
+v = a_1 v_1 + \cdots + a_n v_n,
+\]
+with $a_k v_k \in V_k$. This shows $V = V_1 + \cdots + V_n$. Since the representation is unique, the sum is direct. Thus,
+\[
+V = V_1 \oplus \cdots \oplus V_n.
+\]
+\end{solutionBox}
+
+\ProblemDivider{5}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{3E.1}
+Suppose $T$ is a function from $V$ to $W$. The graph of $T$ is the subset of $V \times W$ defined by
+\[
+\operatorname{graph}(T) = \{(v, Tv) \in V \times W : v \in V\}.
+\]
+Prove that $T$ is a linear map if and only if the graph of $T$ is a subspace of $V \times W$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+($\Rightarrow$) Assume $T$ is linear. Then $T(0)=0$, so $(0,0) = (0,T0) \in \operatorname{graph}(T)$. Let $(u,Tu), (v,Tv) \in \operatorname{graph}(T)$ and $\lambda \in \F$. By linearity,
+\begin{align*}
+(u,Tu) + (v,Tv) &= (u+v, Tu+Tv) = (u+v, T(u+v)) \in \operatorname{graph}(T),\\
+\lambda (v,Tv) &= (\lambda v, \lambda Tv) = (\lambda v, T(\lambda v)) \in \operatorname{graph}(T).
+\end{align*}
+Thus $\operatorname{graph}(T)$ is a subspace of $V \times W$.
+
+($\Leftarrow$) Assume $\operatorname{graph}(T)$ is a subspace. Since it is non‑empty, $(0,0) \in \operatorname{graph}(T)$, so $T(0)=0$. Now let $u,v \in V$ and $\lambda \in \F$. Because $(u,Tu), (v,Tv) \in \operatorname{graph}(T)$ and $\operatorname{graph}(T)$ is closed under addition,
+\[
+(u,Tu)+(v,Tv) = (u+v, Tu+Tv) \in \operatorname{graph}(T).
+\]
+By definition of the graph, the second component must equal $T(u+v)$, so $T(u+v)=Tu+Tv$. Similarly, closure under scalar multiplication gives
+\[
+\lambda(v,Tv) = (\lambda v, \lambda Tv) \in \operatorname{graph}(T) \Rightarrow T(\lambda v) = \lambda Tv.
+\]
+Hence $T$ is linear.
+\end{solutionBox}
+
+\ProblemDivider{6}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{4.1}
+Suppose $w, z \in \C$. Verify the following equalities and inequalities.
+\begin{enumerate}
+  \item[(a)] $z + \bar{z} = 2\operatorname{Re} z$
+  \item[(b)] $z - \bar{z} = 2(\operatorname{Im} z)i$
+  \item[(c)] $z\bar{z} = |z|^2$
+  \item[(d)] $\overline{w+z} = \bar{w} + \bar{z}$ and $\overline{wz} = \bar{w}\,\bar{z}$
+  \item[(e)] $\bar{\bar{z}} = z$
+  \item[(f)] $|\operatorname{Re} z| \leq |z|$ and $|\operatorname{Im} z| \leq |z|$
+  \item[(g)] $|\bar{z}| = |z|$
+  \item[(h)] $|wz| = |w|\,|z|$
+\end{enumerate}
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Write $z = a+bi$, $w = c+di$ with $a,b,c,d \in \R$.
+
+\begin{enumerate}
+  \item[(a)] $z + \bar{z} = (a+bi)+(a-bi) = 2a = 2\operatorname{Re} z$.
+  
+  \item[(b)] $z - \bar{z} = (a+bi)-(a-bi) = 2bi = 2(\operatorname{Im} z)i$.
+  
+  \item[(c)] $z\bar{z} = (a+bi)(a-bi) = a^2 + b^2 = |z|^2$.
+  
+  \item[(d)] 
+  \begin{align*}
+    \overline{w+z} &= \overline{(a+c)+(b+d)i} = (a+c)-(b+d)i = (a-bi)+(c-di) = \bar{w}+\bar{z},\\
+    \overline{wz} &= \overline{(ac-bd)+(ad+bc)i} = (ac-bd)-(ad+bc)i = (a-bi)(c-di) = \bar{w}\,\bar{z}.
+  \end{align*}
+  
+  \item[(e)] $\bar{\bar{z}} = \overline{a-bi} = a+bi = z$.
+  
+  \item[(f)] $|\operatorname{Re} z| = |a| = \sqrt{a^2} \leq \sqrt{a^2+b^2} = |z|$. Similarly, $|\operatorname{Im} z| = |b| \leq \sqrt{a^2+b^2} = |z|$.
+  
+  \item[(g)] $|\bar{z}| = |a-bi| = \sqrt{a^2+(-b)^2} = \sqrt{a^2+b^2} = |z|$.
+  
+  \item[(h)] Using (c) and (d):
+  \[
+  |wz|^2 = (wz)\overline{wz} = wz\bar{w}\bar{z} = (w\bar{w})(z\bar{z}) = |w|^2|z|^2.
+  \]
+  Taking square roots (since magnitudes are non‑negative) gives $|wz| = |w|\,|z|$.
+\end{enumerate}
+\end{solutionBox}
+
+\ProblemDivider{7}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{4.5}
+Is the set
+\[
+\{0\} \cup \{p \in \Pcal(\F) : \deg p \text{ is even}\}
+\]
+a subspace of $\Pcal(\F)$?
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+No. Let $S = \{0\} \cup \{p \in \Pcal(\F) : \deg p \text{ is even}\}$. Consider $p(x)=x^2$ and $q(x)=x-x^2$. Both have even degree so $p,q \in S$. Their sum is
+\[
+p(x)+q(x) = x^2 + (x-x^2) = x,
+\]
+and $\deg(x)=1$, which is odd. Since $x \neq 0$, we have $x \notin S$. Thus $S$ is not closed under addition, and therefore is not a subspace of $\Pcal(\F)$.
+\end{solutionBox}
+
+\end{document}

@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52.42322pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Discussion 1}
+\newcommand{\AssignmentType}{Discussion} % or Discussion
+\newcommand{\AssignmentNumber}{1}
+
+\newcommand{\Contributors}{
+Marks, Stephen\\
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{1}
+Let $m,n$ be two positive integers. Define
+\[
+\mathbb{F}^{m,n}:=\{\text{$m\times n$ matrices with entries in $\mathbb{F}$}\}.
+\]
+See Definition 3.39 in Section 3C. Suppose $T\in \mathcal{L}(V)$, and $\{u_1,\dots,u_n\}$ and $\{v_1,\dots,v_n\}$ are bases of $V$.
+Prove that the following are equivalent.
+\begin{enumerate}
+  \item[(a)] $T$ is invertible.
+  \item[(b)] The columns of $\mathcal{M}(T)$ are linearly independent in $\mathbb{F}^{n,1}$.
+  \item[(c)] The columns of $\mathcal{M}(T)$ span $\mathbb{F}^{n,1}$.
+  \item[(d)] The rows of $\mathcal{M}(T)$ are linearly independent in $\mathbb{F}^{1,n}$.
+  \item[(e)] The rows of $\mathcal{M}(T)$ span $\mathbb{F}^{1,n}$.
+\end{enumerate}
+Here $\mathcal{M}(T)$ means $\mathcal{M}\!\bigl(T,(u_1,\dots,u_n),(v_1,\dots,v_n)\bigr)$ (see Definition 3.31 in Section 3C).
+You can refer to \emph{Rank of Matrix} (page 79) in Section 3C. (Do not use determinants.)
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+\subsection*{(a $\to$ b)}
+Assume (a) and suppose that $\mathcal{M}(T)$ has entries $A_{j,k}$ 
+Let $b_1,\dots,b_n\in\mathbb{F}$ be scalars such that
+\[
+b_1\begin{pmatrix}A_{1,1}\\ \vdots\\ A_{n,1}\end{pmatrix}
++\cdots+
+b_n\begin{pmatrix}A_{1,n}\\ \vdots\\ A_{n,n}\end{pmatrix}
+=
+\begin{pmatrix}b_1A_{1,1}+\cdots+b_nA_{1,n}\\ \vdots\\ b_1A_{n,1}+\cdots+b_nA_{n,n}\end{pmatrix}
+=
+\begin{pmatrix}0\\ \vdots\\ 0\end{pmatrix}.
+\]
+Let $u=b_1u_1+\cdots+b_nu_n$ so that
+\begin{align*}
+Tu
+&= b_1Tu_1+\cdots+b_nTu_n \\
+&= b_1(A_{1,1}v_1+\cdots+A_{n,1}v_n)+\cdots+b_n(A_{1,n}v_1+\cdots+A_{n,n}v_n)\\
+&= (b_1A_{1,1}+\cdots+b_nA_{1,n})v_1+\cdots+(b_1A_{n,1}+\cdots+b_nA_{n,n})v_n\\
+&=0v_1+\cdots+0v_n=0.
+\end{align*}
+Thus $u\in \operatorname{null}T$. Since $T$ is invertible, and thus injective, $u=0$.
+The linear independence of the basis $u_1,\dots,u_n$ then gives $b_1=\cdots=b_n=0$.
+Thus the columns of $\mathcal{M}(T)$ are linearly independent.
+
+\subsection*{(b $\to$ a)}
+Now assume (b) and let $u=b_1u_1+\cdots+b_nu_n$ be such that $Tu=0$.
+Like above, this is equivalent to
+\[
+(b_1A_{1,1}+\cdots+b_nA_{1,n})v_1+\cdots+(b_1A_{n,1}+\cdots+b_nA_{n,n})v_n=0.
+\]
+Due to linear independence of the basis $v_1,\dots,v_n$,
+\[
+b_1A_{1,1}+\cdots+b_nA_{1,n}=\cdots=b_1A_{n,1}+\cdots+b_nA_{n,n}=0,
+\]
+
+\[
+\begin{pmatrix}b_1A_{1,1}+\cdots+b_nA_{1,n}\\ \vdots\\ b_1A_{n,1}+\cdots+b_nA_{n,n}\end{pmatrix}
+=
+b_1\begin{pmatrix}A_{1,1}\\ \vdots\\ A_{n,1}\end{pmatrix}
++\cdots+
+b_n\begin{pmatrix}A_{1,n}\\ \vdots\\ A_{n,n}\end{pmatrix}
+=
+\begin{pmatrix}0\\ \vdots\\ 0\end{pmatrix}.
+\]
+$b_1=\cdots=b_n=0$, because the columns of $\mathcal{M}(T)$ are linearly independent. So $u=0$.
+Thus $T$ is injective. Because $T\in\mathcal{L}(V)$ with $\dim V=n<\infty$, injectivity implies invertibility, so $T$ is invertible.
+
+\subsubsection*{Therefore, (a $\leftrightarrow$ b)}
+
+\subsection*{(b $\to$ c)}
+Assume (b). Since the columns are linearly independent in $\mathbb{F}^{n,1}$, and are a list of $n$ vectors, they span $\mathbb{F}^{n,1}$ since $\dim(\mathbb{F}^{n,1})=n$.
+
+\subsection*{(c $\to$ b)}
+Assume (c). Since the columns span $\mathbb{F}^{n,1}$ and are a list of $n$ vectors in an $n$-dimensional space, they form a basis. So they are linearly independent in $\mathbb{F}^{n,1}$ by the definition of a basis.
+
+\subsubsection*{Therefore, (b $\leftrightarrow$ c)}
+
+\subsection*{(c $\to$ e)}
+Recall:
+\begin{quote}
+3.57: Suppose $A\in \mathbb{F}^{m,n}$. Then the column rank of $A$ equals the row rank of $A$.
+\end{quote}
+Assume (c). Then the column space of $\mathcal{M}(T)$ is equal to $F^{n,1}$, and thus
+\[
+  \dim(\operatorname{Col}(\mathcal{M}(T))) = n,
+\]
+so the column rank of  $\mathcal{M}(T)$ is $n$. By 3.57, the row rank of $\mathcal{M}(T)$ is also $n$. Since the row space of $\mathcal{M}(T)$ is a subspace of $F^{1,n}$, which has dimension $n$, it follows that the row space must be all of $F^{1,n}$. Thus, the rows of $\mathcal{M}(T)$ span $F^{1,n}$.
+
+\subsection*{(e $\to$ c)}
+Conversely, assume (e). Then the row space of $\mathcal{M}(T)$ is equal to $F^{1,n}$, so the row rank of $\mathcal{M}(T)$ is $n$. By 3.57, the column rank of $\mathcal{M}(T)$ is also $n$. Since the column space of $\mathcal{M}(T)$ is a subspace of $F^{n,1}$ with dimension $n$, it follows that the column space must be all of $F^{n,1}$. Thus, the columns of $\mathcal{M}(T)$ span $F^{n,1}$.
+\subsubsection*{Therefore, (c $\leftrightarrow$ e)}
+
+\subsection*{(d $\to$ e)}
+Assume (d). Since the rows are linearly independent in $\mathbb{F}^{1,n}$ and are a list of $n$ vectors, they span $\mathbb{F}^{1,n}$ since $\dim(\mathbb{F}^{1,n})=n$.
+
+\subsection*{(e $\to$ d)}
+Assume (e). Since the rows span $\mathbb{F}^{1,n}$ and are a list of $n$ vectors in an $n$-dimensional space, they form a basis. So they are linearly independent in $\mathbb{F}^{1,n}$ by the definition of a basis.
+
+\subsubsection*{Therefore, (d $\leftrightarrow$ e)}
+
+So, by (a) $\leftrightarrow$ (b) $\leftrightarrow$ (c) $\leftrightarrow$ (e) $\leftrightarrow$ (d), (a) -- (e) are equivalent.
+
+
+\end{solutionBox}
+
+\hfill \ensuremath{\square}
+\end{document}

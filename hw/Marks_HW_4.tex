@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 4}
+\newcommand{\AssignmentType}{Homework} % or Discussion
+\newcommand{\AssignmentNumber}{4}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\calL}{\mathcal{L}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.C.6}
+Suppose $\F = \C$, $V$ is finite-dimensional, and $T \in \calL(V)$. Prove that if
+$k \in \{1, \dots, \dim V\}$, then $V$ has a $k$-dimensional subspace invariant under $T$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Since $V$ is a finite-dimensional complex vector space, every operator $T$ on $V$ has an upper triangular matrix by 5.47. Let $v_1, \dots, v_n$ be a basis of $V$ with respect to which $T$ has an upper triangular matrix. For any $k \in \{1, \dots, n\}$, consider the subspace $U = \operatorname{span}(v_1, \dots, v_k)$. By the conditions for upper triangular matrices (5.39), for each $j \leq k$, we have
+\[
+Tv_j \in \operatorname{span}(v_1, \dots, v_j) \subseteq \operatorname{span}(v_1, \dots, v_k) = U.
+\]
+Thus $T(U) \subseteq U$, so $U$ is invariant under $T$. Since $\dim U = k$, we have shown that $V$ has a $k$-dimensional subspace invariant under $T$ for each $k \in \{1, \dots, \dim V\}$.
+
+\end{solutionBox}
+
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.C.7}
+Suppose $V$ is finite-dimensional, $T \in \calL(V)$, and $v \in V$.
+
+(a) Prove that there exists a unique monic polynomial $p_v$ of smallest degree such that $p_v(T)v = 0$.
+
+(b) Prove that the minimal polynomial of $T$ is a polynomial multiple of $p_v$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+(a) If $v = 0$, then we can take $p_v = 1$, so assume $v \neq 0$.
+
+Consider the list
+\[
+v,\, Tv,\, T^2v,\, \dots,\, T^{\dim V}v.
+\]
+This list contains $1 + \dim V$ vectors in a vector space of dimension $\dim V$, and therefore it must be linearly dependent. By the Linear Dependence Lemma (2.19), there exists a smallest integer
+\[
+k \in \{1,\dots,\dim V\}
+\]
+such that
+\[
+T^k v \in U := \operatorname{span}(v, Tv, \dots, T^{k-1}v),
+\]
+and such that the list
+\[
+v, Tv, \dots, T^{k-1}v
+\]
+is linearly independent. In particular, $\dim U = k$.
+
+We now show that $U$ is invariant under $T$. For $j < k-1$, we have
+\[
+T(T^j v) = T^{j+1}v \in U,
+\]
+and by construction,
+\[
+T(T^{k-1}v) = T^k v \in U.
+\]
+Thus $T(U) \subseteq U$, so $U$ is invariant under $T$.
+
+Let $p_v$ denote the minimal polynomial of the restricted operator $T|_U$. Because $v \in U$, we have
+\[
+p_v(T)v = p_v(T|_U)v = 0.
+\]
+
+Now suppose $q$ is a polynomial with
+\[
+\deg q = s < \deg p_v \le \dim U = k
+\]
+such that
+\[
+q(T)v = 0.
+\]
+Then this gives a linear relation expressing $T^s v$ as a linear combination of
+\[
+v, Tv, \dots, T^{s-1}v,
+\]
+which contradicts the minimal choice of $k$. Therefore $\deg p_v$ is minimal among all polynomials satisfying $p(T)v = 0$.
+
+Finally, suppose $r$ is another monic polynomial such that
+\[
+\deg r = \deg p_v
+\quad \text{and} \quad
+r(T)v = 0.
+\]
+Then
+\[
+(p_v - r)(T)v = 0,
+\]
+and because both $p_v$ and $r$ are monic,
+\[
+\deg(p_v - r) < \deg p_v.
+\]
+If $p_v - r$ were not the zero polynomial, we could divide it by its leading coefficient to obtain a monic polynomial $s$ satisfying
+\[
+s(T)v = 0
+\quad \text{and} \quad
+\deg s < \deg p_v,
+\]
+which contradicts the minimality of $\deg p_v$. Thus $p_v - r = 0$, and therefore $p_v = r$.
+
+Thus $p_v$ is unique.
+
+(b) By 5.31, the minimal polynomial of $T$ annihilates every vector in $V$, so $p(T)v = 0$. Since $p_v$ is the minimal degree monic polynomial satisfying $p_v(T)v = 0$, the minimal polynomial of $T$ must be a polynomial multiple of $p_v$.
+
+\end{solutionBox}
+
+\newpage
+
+\ProblemDivider{3}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.C.8}
+Suppose $V$ is finite-dimensional, $T \in \calL(V)$, and there exists a nonzero vector $v \in V$ such that $T^2 v + 2Tv = -2v$.
+
+(a) Prove that if $\F = \R$, then there does not exist a basis of $V$ with respect to which $T$ has an upper-triangular matrix.
+
+(b) Prove that if $\F = \C$ and $A$ is an upper-triangular matrix that equals the matrix of $T$ with respect to some basis of $V$, then $-1 + i$ or $-1 - i$ appears on the diagonal of $A$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+(a) The given equation $T^2v + 2Tv = -2v$ can be rewritten as
+\[
+T^2v + 2Tv + 2v = 0 \quad \Longrightarrow \quad (T^2 + 2T + 2I)v = 0.
+\]
+Since $v \neq 0$, the operator $T^2 + 2T + 2I$ is not injective. The polynomial $x^2 + 2x + 2$ has roots given by the quadratic formula:
+\[
+x = \frac{-2 \pm \sqrt{2^2 - 4(1)(2)}}{2(1)} = \frac{-2 \pm \sqrt{4-8}}{2} = \frac{-2 \pm \sqrt{-4}}{2} = \frac{-2 \pm 2i}{2} = -1 \pm i.
+\]
+Thus $x^2 + 2x + 2 = (x - (-1+i))(x - (-1-i))$, and these roots are non-real complex numbers.
+
+If $\F = \R$, then $T$ has no real eigenvalues (since the only possible eigenvalues would be roots of this polynomial, which are non-real). By 5.44, an operator on a real vector space has an upper-triangular matrix with respect to some basis if and only if its minimal polynomial can be split into linear factors over $\R$. Since the polynomial $x^2 + 2x + 2$ does not split over $\R$, and this polynomial annihilates $v$, the minimal polynomial of $T$ cannot split over $\R$ becuase the minimal polynomial must be a polynomial multiple of the given polynomial by exercise 5.C.7. Therefore, there does not exist a basis of $V$ with respect to which $T$ has an upper-triangular matrix if $\F$ = $\R$.
+
+(b) If $\F = \C$, then by 5.41, the diagonal entries of any upper-triangular matrix representing $T$ are exactly the eigenvalues of $T$. So $(T^2 + 2T + 2I)v = 0$ with $v \neq 0$ implies that $T$ has $-1+i$ or $-1-i$ as an eigenvalue. Thus, either $-1+i$ or $-1-i$ must appear on the diagonal of any upper-triangular matrix representing $T$.
+
+\end{solutionBox}
+\newpage
+
+\ProblemDivider{4}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{5.C.9}
+Suppose $B$ is a square matrix with complex entries. Prove that there exists an invertible square matrix $A$ with complex entries such that $A^{-1}BA$ is an upper-triangular matrix.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose $B$ is an $n \times n$ matrix with complex entries. Define a linear operator 
+$T \in \calL(\C^n)$ by
+\[
+T(x) = Bx,
+\]
+where vectors in $\C^n$ are column vectors.
+
+With respect to the standard basis $e_1, \dots, e_n$ of $\C^n$, the matrix 
+of $T$ is exactly $B$.
+
+Because $\F$ = $\C$, 5.47 guarantees the existence 
+of a basis $v_1, \dots, v_n$ of $\C^n$ such that the matrix 
+$\mathcal{M}(T, (v_1,\dots,v_n))$ is upper triangular.
+
+Let
+\[
+A = \mathcal{M}(I, (v_1,\dots,v_n), (e_1,\dots,e_n)),
+\]
+which is the change of basis matrix from $(v_1,\dots,v_n)$ to the standard basis by 3.84. Since 
+$(v_1,\dots,v_n)$ is a basis, $A$ is invertible.
+
+By the change of basis formula,
+\[
+A^{-1}BA
+=
+\mathcal{M}(T, (v_1,\dots,v_n)),
+\]
+which is upper triangular. Therefore, there exists an invertible matrix $A$ such 
+that $A^{-1}BA$ is upper triangular.
+
+\end{solutionBox}
+
+\end{document}

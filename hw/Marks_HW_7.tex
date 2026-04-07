@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\usepackage{setspace}
+
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+\tcbset{
+  enhanced,
+  boxrule=0pt,
+  frame hidden,
+  breakable
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0pt}
+
+\newcommand{\Course}{Math 4610 Spring 2026}
+\newcommand{\Instructor}{Homework 7}
+\newcommand{\AssignmentType}{Homework}
+\newcommand{\AssignmentNumber}{7}
+
+\newcommand{\Contributors}{
+Marks, Stephen
+}
+
+\fancyhead[L]{\Course\\ \Instructor}
+\fancyhead[R]{\Contributors}
+
+\newcommand{\ProblemDivider}[1]{%
+  \vspace{1.0em}
+  \noindent\textbf{#1}\par
+  \vspace{0.35em}
+}
+
+\definecolor{problemBack}{RGB}{235,242,250}
+\definecolor{problemFrame}{RGB}{70,110,160}
+\definecolor{exerciseGray}{gray}{0.96}
+\definecolor{exerciseGrayFrame}{gray}{0.45}
+
+\newtcolorbox{problemBox}{
+  colback=exerciseGray,
+  colframe=exerciseGrayFrame,
+  arc=2mm,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+}
+
+\newtcolorbox{solutionBox}{
+  colback=white,
+  colframe=white,
+  arc=0mm,
+  left=0pt,right=0pt,top=0pt,bottom=0pt
+}
+
+\newcommand{\ProblemAnnounce}{\noindent}
+\newcommand{\SolutionAnnounce}{\noindent\textbf{Solution.}\par\medskip}
+\newcommand{\Exercise}[1]{\textbf{Exercise~#1.}\;}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\spann}{\operatorname{span}}
+\newcommand{\conjugate}{\operatorname{conjugate}}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{\AssignmentType~\AssignmentNumber}}
+\end{center}
+\vspace{0.75em}
+
+\ProblemDivider{1}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.A.1}
+Suppose $n$ is a positive integer. Define $T \in \LL(\F^n)$ by
+\[
+T(z_1, \dots, z_n) = (0, z_1, \dots, z_{n-1}).
+\]
+Find a formula for $T^*(z_1, \dots, z_n)$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose $v,w \in \F^n$. Then
+\[
+\langle Tv,w\rangle = 0w_1 + v_1w_2 + v_2w_3 + \cdots + v_{n-1}w_n
+\]
+\[
+= v_1w_2 + v_2w_3 + \cdots + v_{n-1}w_n
+\]
+\[
+= v_1w_2 + v_2w_3 + \cdots + v_{n-1}w_n + 0v_n = \langle v,T^*w\rangle.
+\]
+Thus, $T^*w = (w_2,w_3,\dots,w_n,0)$
+
+\end{solutionBox}
+
+\ProblemDivider{2}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.A.3}
+Suppose $T \in \LL(V)$ and $\lambda \in \F$. Prove that
+\[
+\lambda \text{ is an eigenvalue of } T \Longleftrightarrow \conjugate(\lambda) \text{ is an eigenvalue of } T^*.
+\]
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose $\lambda$ is an eigenvalue of $T$ and $v \in V$. Then
+\[
+Tv = \lambda v
+\]
+\[
+\Longleftrightarrow (T-\lambda I)v = 0.
+\]
+\[
+\Longleftrightarrow (T-\lambda I) \text{ is not invertible}.
+\]
+\[
+\Longleftrightarrow (T-\lambda I)^* \text{ is not invertible}.
+\]
+\[
+\Longleftrightarrow (T^*-\conjugate(\lambda)I)w = 0 \text{ for some } w \neq 0 \in V.
+\]
+\[
+\Longleftrightarrow T^*w = \conjugate(\lambda)w
+\]
+
+\end{solutionBox}
+
+\ProblemDivider{3}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.A.4}
+Suppose $T \in \LL(V)$ and $U$ is a subspace of $V$. Prove that
+\[
+U \text{ is invariant under } T \Longleftrightarrow U^\perp \text{ is invariant under } T^*.
+\]
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose $U$ is invariant under $T$.
+\[
+U \text{ is invariant under } T.
+\]
+\[
+\Longleftrightarrow Tu \in U \quad \forall u \in U.
+\]
+\[
+\Longleftrightarrow Tu \in (U^\perp)^\perp = U \quad \forall u \in U.
+\]
+\[
+\Longleftrightarrow \langle Tu, w\rangle = 0 \quad \forall u \in U, \forall w \in U^\perp.
+\]
+\[
+\Longleftrightarrow \langle u, T^*w\rangle = 0 \quad \forall u \in U, \forall w \in U^\perp.
+\]
+\[
+\Longleftrightarrow T^*w \in U^\perp \quad \forall w \in U^\perp.
+\]
+\[
+\Longleftrightarrow U^\perp \text{ is invariant under } T^*.
+\]
+
+\end{solutionBox}
+
+\ProblemDivider{4}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.B.1}
+Prove that a normal operator on a complex inner product space is self-adjoint if and only if all its eigenvalues are real. This exercise strengthens the analogy (for normal operators) between self-adjoint operators and real numbers.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+$(\rightarrow)$ Suppose $V$ is a complex inner product space and $T \in \LL(V)$ is normal. If $T$ is self-adjoint then every eigenvalue of $T$ is real by 7.12.
+
+$(\leftarrow)$ Suppose that every eigenvalue of $T$ is real. 7.31 implies that there is an orthonormal basis of $V$ with respect to which the matrix $\mathcal{M}(T)$ is diagonal. Because each eigenvalue of $T$ is real, the diagonal entries of $\mathcal{M}(T)$ must be real. It follows that $\mathcal{M}(T)$ equals its own conjugate transpose and thus that $T$ is self-adjoint.
+
+\end{solutionBox}
+
+\ProblemDivider{5}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.B.2}
+Suppose $\F = \C$. Suppose $T \in \LL(V)$ is normal and has only one eigenvalue. Prove that $T$ is a scalar multiple of the identity operator.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+Suppose that $\lambda \in \C$ is the only eigenvalue of $T$. Then there is an orthonormal basis of $V$ with respect to which $\mathcal{M}(T)$ is diagonal by 7.31. Since $\lambda$ is the only eigenvalue of $T$, each diagonal entry of $\mathcal{M}(T)$ must be equal to $\lambda$. Thus $T = \lambda I$.
+
+\end{solutionBox}
+
+\ProblemDivider{6}
+
+\begin{problemBox}
+\ProblemAnnounce
+\Exercise{7.B.3}
+Suppose $\F = \C$ and $T \in \LL(V)$ is normal. Prove that the set of eigenvalues of $T$ is contained in $\{0, 1\}$ if and only if there is a subspace $U$ of $V$ such that $T = P_U$.
+\end{problemBox}
+
+\begin{solutionBox}
+\SolutionAnnounce
+\doublespacing
+
+$(\leftarrow)$ If there exists a subspace $U$ of $V$ such that $T = P_U$ then $T^2 = T$ then it follows from 5.A.8 that the set of eigenvalues of $T$ is contained in $\{0, 1\}$.
+
+$(\rightarrow)$ Suppose that the set of eigenvalues of $T$ is contained in $\{0, 1\}$. Then there is an orthonormal basis $\mathcal{B}$ of $V$ consisting of eigenvectors of $T$ by 7.31. Each basis vector in $\mathcal{B}$ must correspond either to the eigenvalue $0$ or the eigenvalue $1$. Let $u_1, \dots, u_m$ be those basis vectors in $\mathcal{B}$ corresponding to the eigenvalue $1$ and let $v_1, \dots, v_n$ be those basis vectors in $\mathcal{B}$ corresponding to the eigenvalue $0$, but either of these lists may be empty. Let
+\[
+U = \spann(u_1, \dots, u_m).
+\]
+Because $\mathcal{B}$ is an orthonormal basis of $V$, it follows that
+\[
+U^\perp = \spann(v_1, \dots, v_n)
+\]
+and thus
+\[
+P_Uu_k = u_k = Tu_k
+\]
+and
+\[
+P_Uv_k = 0 = Tv_k.
+\]
+Thus $T = P_U$.
+
+\end{solutionBox}
+
+\end{document}
